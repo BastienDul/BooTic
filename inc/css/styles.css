@@ -1,0 +1,42 @@
+.border{
+    border: 1px solid black;
+}
+
+/* background */
+
+main{
+    background-color: rgba(128, 128, 128, 0.438);
+}
+
+header{
+    background-color: white;
+}
+
+footer{
+    background-color: white;
+}
+
+/* Mise en page concernant le header */
+
+hr{
+    color: black;
+}
+
+
+
+/* Mise en page concernant la page de connexion */
+
+.form-login{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 75vh;
+
+}
+
+/* Mise en page index.html */
+
+h5{
+    font-weight: bold;
+}
+
