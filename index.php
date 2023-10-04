@@ -1,832 +1,216 @@
-<!DOCTYPE html>
-<html lang="fr">
+<?php include './inc/img/header.inc.php'; ?>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"
-        defer>
-        </script>
-        <script src="https://kit.fontawesome.com/2a53f181be.js" crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="./inc/css/styles.css">
-    <title>BooTic | Vêtement de haute couture</title>
-</head>
+<!-- Appel a la base de données -->
+<main class="row">
+    
+    <div id="carouselExample1" class="carousel text-center slide py-5 col-6">
+        <h1 class=" mb-3 text-center">Les casquettes</h1>
+        <div class="carousel-inner">
+            <?php
 
-<body>
+                try{
+                    $userName = "root";
+                    $password = '';
+                    $dsn = 'mysql:host=localhost;dbname=dbbootic;port=3306;charset=utf8';
+                    $maBase = new PDO ($dsn, $userName, $password );
 
-    <?php include './inc/img/header.inc.php'; ?>
+                    // $req est un PDOStatement qui effectue une requete sql afin de pouvoir s'en servir en se connectant a $maBase
+                    $req = $maBase->query('SELECT * FROM t_produit INNER JOIN t_categorie ON t_produit.id_categorie = t_categorie.id_categorie');
+                    
+                    $res = $req->fetchAll();
+                    foreach($res as $key => $value){
+                        if($value[2] == 4){
+                            if ($key == 1 ) {
+                                echo("<div class=\"carousel-item\">
+                                <div class=\"card p-0 m-0 mx-auto\" style=\"width: 18rem;\">
+                                <img src=\"./inc/img/BOOTIC_IMG/".$value[12]."/".$value[8].".webp\" class=\"card-img-top\" alt=\"Image d'une casquette\">
+                                <div class=\"card-body\">
+                                    <h5 class=\"card-title\">".$value[3]."</h5>
+                                    <p class=\"card-text\">Prix : ".$value[9]." €</p>
+                                    <p class=\"card-text\">Taille :".$value[6]."</p>
+                                    <p class=\"card-text\">".$value[4]."</p>
+                                    <a href=\"#\" class=\"btn btn-secondary\">Ajouter au panier</a>
+                                </div>
+                                </div>
+                                </div>");
+                            } else {
+                                echo("<div class=\"carousel-item active\">
+                                <div class=\"card mx-auto\" style=\"width: 18rem;\">
+                                <img src=\"./inc/img/BOOTIC_IMG/".$value[12]."/".$value[8].".webp\" class=\"card-img-top\" alt=\"Image d'une casquette\">
+                                <div class=\"card-body\">
+                                    <h5 class=\"card-title\">".$value[3]."</h5>
+                                    <p class=\"card-text\">prix : ".$value[9]." €</p>
+                                    <p class=\"card-text\">Taille : ".$value[6]."</p>
+                                    <p class=\"card-text\">".$value[4]."</p>
+                                    <a href=\"#\" class=\"btn btn-secondary\">Ajouter au panier</a>
+                                </div>
+                                </div>
+                                </div>");
+                            }
+                            
+                        }
 
-    <main class="">
-        <div class="row">
-            <div id="carouselExample" class="carousel slide py-5 col-12">
-                <h1 class="text-center mb-3">Les casquettes</h1>
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col text-center">
-                                    <div class="card mx-auto p-3" style="width: 18rem;">
-                                        <img class="card-img-top"
-                                            src="./inc/img/BOOTIC_IMG/casquettes/casquette_azur.webp"
-                                            alt="Card image cap">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Casquette</h5>
-                                            <p class="card-text">Casquette en coton de coton</p>
-                                            <p class="card-text">Prix : 150€</p>
-                                            <a href="#" class="btn btn-secondary">Ajouter au panier</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col text-center">
-                                    <div class="card mx-auto p-3" style="width: 18rem;">
-                                        <img class="card-img-top"
-                                            src="./inc/img/BOOTIC_IMG/casquettes/casquette_blanche.webp"
-                                            alt="Card image cap">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Casquette</h5>
-                                            <p class="card-text">Casquette en coton de coton</p>
-                                            <p class="card-text">Prix : 150€</p>
-                                            <a href="#" class="btn btn-secondary">Ajouter au panier</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col text-center">
-                                    <div class="card mx-auto p-3" style="width: 18rem;">
-                                        <img class="card-img-top"
-                                            src="./inc/img/BOOTIC_IMG/casquettes/casquette_bleu.webp"
-                                            alt="Card image cap">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Casquette</h5>
-                                            <p class="card-text">Casquette en coton de coton</p>
-                                            <p class="card-text">Prix : 150€</p>
-                                            <a href="#" class="btn btn-secondary">Ajouter au panier</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col text-center">
-                                    <div class="card mx-auto p-3" style="width: 18rem;">
-                                        <img class="card-img-top"
-                                            src="./inc/img/BOOTIC_IMG/casquettes/casquette_camou.webp"
-                                            alt="Card image cap">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Casquette</h5>
-                                            <p class="card-text">Casquette en coton de coton</p>
-                                            <p class="card-text">Prix : 150€</p>
-                                            <a href="#" class="btn btn-secondary">Ajouter au panier</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col text-center">
-                                    <div class="card mx-auto p-3" style="width: 18rem;">
-                                        <img class="card-img-top"
-                                            src="./inc/img/BOOTIC_IMG/casquettes/casquette_jaune.webp"
-                                            alt="Card image cap">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Casquette</h5>
-                                            <p class="card-text">Casquette en coton de coton</p>
-                                            <p class="card-text">Prix : 150€</p>
-                                            <a href="#" class="btn btn-secondary">Ajouter au panier</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col text-center">
-                                    <div class="card mx-auto p-3" style="width: 18rem;">
-                                        <img class="card-img-top"
-                                            src="./inc/img/BOOTIC_IMG/casquettes/casquette_noire.webp"
-                                            alt="Card image cap">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Casquette</h5>
-                                            <p class="card-text">Casquette en coton de coton</p>
-                                            <p class="card-text">Prix : 150€</p>
-                                            <a href="#" class="btn btn-secondary">Ajouter au panier</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col text-center">
-                                    <div class="card mx-auto p-3" style="width: 18rem;">
-                                        <img class="card-img-top"
-                                            src="./inc/img/BOOTIC_IMG/casquettes/casquette_rose.webp"
-                                            alt="Card image cap">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Casquette</h5>
-                                            <p class="card-text">Casquette en coton de coton</p>
-                                            <p class="card-text">Prix : 150€</p>
-                                            <a href="#" class="btn btn-secondary">Ajouter au panier</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col text-center">
-                                    <div class="card mx-auto p-3" style="width: 18rem;">
-                                        <img class="card-img-top"
-                                            src="./inc/img/BOOTIC_IMG/casquettes/casquette_rouge.webp"
-                                            alt="Card image cap">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Casquette</h5>
-                                            <p class="card-text">Casquette en coton de coton</p>
-                                            <p class="card-text">Prix : 150€</p>
-                                            <a href="#" class="btn btn-secondary">Ajouter au panier</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col text-center">
-                                    <div class="card mx-auto p-3" style="width: 18rem;">
-                                        <img class="card-img-top"
-                                            src="./inc/img/BOOTIC_IMG/casquettes/casquette_verte.webp"
-                                            alt="Card image cap">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Casquette</h5>
-                                            <p class="card-text">Casquette en coton de coton</p>
-                                            <p class="card-text">Prix : 150€</p>
-                                            <a href="#" class="btn btn-secondary">Ajouter au panier</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col text-center">
-                                    <div class="card mx-auto p-3" style="width: 18rem;">
-                                        <img class="card-img-top"
-                                            src="./inc/img/BOOTIC_IMG/casquettes/casquette_violette.webp"
-                                            alt="Card image cap">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Casquette</h5>
-                                            <p class="card-text">Casquette en coton de coton</p>
-                                            <p class="card-text">Prix : 150€</p>
-                                            <a href="#" class="btn btn-secondary">Ajouter au panier</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample"
-                    data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample"
-                    data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div>
+                    }
+                }   
+                    // Si la connexion ne se fait pas, try renvois a catch, qui contient les messages d'erreur dans PDOException $e et qu'il l'echo de manière beaucoup plus lisible.
 
-            <!-- Les sacs -->
+                catch (PDOException $e){
+                    echo'Erreur :'. $e->getMessage();
+                }
 
-            <div id="carouselExample1" class="carousel slide py-5 col-12">
-                <h1 class="text-center mb-3">Les Sacs</h1>
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col text-center">
-                                    <div class="card mx-auto p-3" style="width: 18rem;">
-                                        <img class="card-img-top" src="./inc/img/BOOTIC_IMG/sacs/sac_azur.webp"
-                                            alt="Card image cap">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Sac</h5>
-                                            <p class="card-text">Sac en coton de coton</p>
-                                            <p class="card-text">Prix : 20€</p>
-                                            <a href="#" class="btn btn-secondary">Ajouter au panier</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col text-center">
-                                    <div class="card mx-auto p-3" style="width: 18rem;">
-                                        <img class="card-img-top" src="./inc/img/BOOTIC_IMG/sacs/sac_blanc.webp"
-                                            alt="Card image cap">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Sac</h5>
-                                            <p class="card-text">Sac en coton de coton</p>
-                                            <p class="card-text">Prix : 20€</p>
-                                            <a href="#" class="btn btn-secondary">Ajouter au panier</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col text-center">
-                                    <div class="card mx-auto p-3" style="width: 18rem;">
-                                        <img class="card-img-top" src="./inc/img/BOOTIC_IMG/sacs/sac_bleu.webp"
-                                            alt="Card image cap">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Sac</h5>
-                                            <p class="card-text">Sac en coton de coton</p>
-                                            <p class="card-text">Prix : 20€</p>
-                                            <a href="#" class="btn btn-secondary">Ajouter au panier</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col text-center">
-                                    <div class="card mx-auto p-3" style="width: 18rem;">
-                                        <img class="card-img-top" src="./inc/img/BOOTIC_IMG/sacs/sac_jaune.webp"
-                                            alt="Card image cap">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Sac</h5>
-                                            <p class="card-text">Sac en coton de coton</p>
-                                            <p class="card-text">Prix : 20€</p>
-                                            <a href="#" class="btn btn-secondary">Ajouter au panier</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col text-center">
-                                    <div class="card mx-auto p-3" style="width: 18rem;">
-                                        <img class="card-img-top" src="./inc/img/BOOTIC_IMG/sacs/sac_liedevin.webp"
-                                            alt="Card image cap">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Sac</h5>
-                                            <p class="card-text">Sac en coton de coton</p>
-                                            <p class="card-text">Prix : 20€</p>
-                                            <a href="#" class="btn btn-secondary">Ajouter au panier</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col text-center">
-                                    <div class="card mx-auto p-3" style="width: 18rem;">
-                                        <img class="card-img-top" src="./inc/img/BOOTIC_IMG/sacs/sac_magenta.webp"
-                                            alt="Card image cap">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Sac</h5>
-                                            <p class="card-text">Sac en coton de coton</p>
-                                            <p class="card-text">Prix : 20€</p>
-                                            <a href="#" class="btn btn-secondary">Ajouter au panier</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col text-center">
-                                    <div class="card mx-auto p-3" style="width: 18rem;">
-                                        <img class="card-img-top" src="./inc/img/BOOTIC_IMG/sacs/sac_noir.webp"
-                                            alt="Card image cap">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Sac</h5>
-                                            <p class="card-text">Sac en coton de coton</p>
-                                            <p class="card-text">Prix : 20€</p>
-                                            <a href="#" class="btn btn-secondary">Ajouter au panier</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col text-center">
-                                    <div class="card mx-auto p-3" style="width: 18rem;">
-                                        <img class="card-img-top" src="./inc/img/BOOTIC_IMG/sacs/sac_rose.webp"
-                                            alt="Card image cap">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Sac</h5>
-                                            <p class="card-text">Sac en coton de coton</p>
-                                            <p class="card-text">Prix : 20€</p>
-                                            <a href="#" class="btn btn-secondary">Ajouter au panier</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col text-center">
-                                    <div class="card mx-auto p-3" style="width: 18rem;">
-                                        <img class="card-img-top" src="./inc/img/BOOTIC_IMG/sacs/sac_rouge.webp"
-                                            alt="Card image cap">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Sac</h5>
-                                            <p class="card-text">Sac en coton de coton</p>
-                                            <p class="card-text">Prix : 20€</p>
-                                            <a href="#" class="btn btn-secondary">Ajouter au panier</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col text-center">
-                                    <div class="card mx-auto p-3" style="width: 18rem;">
-                                        <img class="card-img-top" src="./inc/img/BOOTIC_IMG/sacs/sac_vert.webp"
-                                            alt="Card image cap">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Sac</h5>
-                                            <p class="card-text">Sac en coton de coton</p>
-                                            <p class="card-text">Prix : 20€</p>
-                                            <a href="#" class="btn btn-secondary">Ajouter au panier</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample1"
-                    data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample1"
-                    data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div>
+                ?>
 
-            <!-- LES SWEATS -->
-
-            <div id="carouselExample2" class="carousel slide py-5 col-12">
-                <h1 class="text-center mb-3">Les Sweats</h1>
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col text-center">
-                                    <div class="card mx-auto p-3" style="width: 18rem;">
-                                        <img class="card-img-top" src="./inc/img/BOOTIC_IMG/sweats/sw_blanc.webp"
-                                            alt="Card image cap">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Sweat</h5>
-                                            <p class="card-text">Sweat en coton de coton</p>
-                                            <p class="card-text">Prix : 40€</p>
-                                            <a href="#" class="btn btn-secondary">Ajouter au panier</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col text-center">
-                                    <div class="card mx-auto p-3" style="width: 18rem;">
-                                        <img class="card-img-top" src="./inc/img/BOOTIC_IMG/sweats/sw_bleu.webp"
-                                            alt="Card image cap">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Sweat</h5>
-                                            <p class="card-text">Sweat en coton de coton</p>
-                                            <p class="card-text">Prix : 40€</p>
-                                            <a href="#" class="btn btn-secondary">Ajouter au panier</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col text-center">
-                                    <div class="card mx-auto p-3" style="width: 18rem;">
-                                        <img class="card-img-top" src="./inc/img/BOOTIC_IMG/sweats/sw_fushia.webp"
-                                            alt="Card image cap">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Sweat</h5>
-                                            <p class="card-text">Sweat en coton de coton</p>
-                                            <p class="card-text">Prix : 40€</p>
-                                            <a href="#" class="btn btn-secondary">Ajouter au panier</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col text-center">
-                                    <div class="card mx-auto p-3" style="width: 18rem;">
-                                        <img class="card-img-top" src="./inc/img/BOOTIC_IMG/sweats/sw_jaune.webp"
-                                            alt="Card image cap">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Sweat</h5>
-                                            <p class="card-text">Sweat en coton de coton</p>
-                                            <p class="card-text">Prix : 40€</p>
-                                            <a href="#" class="btn btn-secondary">Ajouter au panier</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col text-center">
-                                    <div class="card mx-auto p-3" style="width: 18rem;">
-                                        <img class="card-img-top" src="./inc/img/BOOTIC_IMG/sweats/sw_noir.webp"
-                                            alt="Card image cap">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Sweat</h5>
-                                            <p class="card-text">Sweat en coton de coton</p>
-                                            <p class="card-text">Prix : 40€</p>
-                                            <a href="#" class="btn btn-secondary">Ajouter au panier</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col text-center">
-                                    <div class="card mx-auto p-3" style="width: 18rem;">
-                                        <img class="card-img-top" src="./inc/img/BOOTIC_IMG/sweats/sw_orange.webp"
-                                            alt="Card image cap">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Sweat</h5>
-                                            <p class="card-text">Sweat en coton de coton</p>
-                                            <p class="card-text">Prix : 40€</p>
-                                            <a href="#" class="btn btn-secondary">Ajouter au panier</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col text-center">
-                                    <div class="card mx-auto p-3" style="width: 18rem;">
-                                        <img class="card-img-top" src="./inc/img/BOOTIC_IMG/sweats/sw_rose.webp"
-                                            alt="Card image cap">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Sweat</h5>
-                                            <p class="card-text">Sweat en coton de coton</p>
-                                            <p class="card-text">Prix : 40€</p>
-                                            <a href="#" class="btn btn-secondary">Ajouter au panier</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col text-center">
-                                    <div class="card mx-auto p-3" style="width: 18rem;">
-                                        <img class="card-img-top" src="./inc/img/BOOTIC_IMG/sweats/sw_rouge.webp"
-                                            alt="Card image cap">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Sweat</h5>
-                                            <p class="card-text">Sweat en coton de coton</p>
-                                            <p class="card-text">Prix : 40€</p>
-                                            <a href="#" class="btn btn-secondary">Ajouter au panier</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col text-center">
-                                    <div class="card mx-auto p-3" style="width: 18rem;">
-                                        <img class="card-img-top" src="./inc/img/BOOTIC_IMG/sweats/sw_vert.webp"
-                                            alt="Card image cap">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Sweat</h5>
-                                            <p class="card-text">Sweat en coton de coton</p>
-                                            <p class="card-text">Prix : 40€</p>
-                                            <a href="#" class="btn btn-secondary">Ajouter au panier</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col text-center">
-                                    <div class="card mx-auto p-3" style="width: 18rem;">
-                                        <img class="card-img-top" src="./inc/img/BOOTIC_IMG/sweats/sw_violet.webp"
-                                            alt="Card image cap">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Sweat</h5>
-                                            <p class="card-text">Sweat en coton de coton</p>
-                                            <p class="card-text">Prix : 40€</p>
-                                            <a href="#" class="btn btn-secondary">Ajouter au panier</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample2"
-                    data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample2"
-                    data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div>
-
-            <!-- Les t-shirt -->
-
-            <div id="carouselExample3" class="carousel slide py-5 col-12">
-                <h1 class="text-center mb-3">Les t-shirt</h1>
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col text-center">
-                                    <div class="card mx-auto p-3" style="width: 18rem;">
-                                        <img class="card-img-top" src="./inc/img/BOOTIC_IMG/t_shirt/ts_azur.webp"
-                                            alt="Card image cap">
-                                        <div class="card-body">
-                                            <h5 class="card-title">t-shirt</h5>
-                                            <p class="card-text">t-shirt en coton de coton</p>
-                                            <p class="card-text">Prix : 10€</p>
-                                            <a href="#" class="btn btn-secondary">Ajouter au panier</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col text-center">
-                                    <div class="card mx-auto p-3" style="width: 18rem;">
-                                        <img class="card-img-top" src="./inc/img/BOOTIC_IMG/t_shirt/ts_blanc.webp"
-                                            alt="Card image cap">
-                                        <div class="card-body">
-                                            <h5 class="card-title">T-shirt</h5>
-                                            <p class="card-text">T-shirt en coton de coton</p>
-                                            <p class="card-text">Prix : 10€</p>
-                                            <a href="#" class="btn btn-secondary">Ajouter au panier</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col text-center">
-                                    <div class="card mx-auto p-3" style="width: 18rem;">
-                                        <img class="card-img-top" src="./inc/img/BOOTIC_IMG/t_shirt/ts_bleu.webp"
-                                            alt="Card image cap">
-                                        <div class="card-body">
-                                            <h5 class="card-title">T-shirt</h5>
-                                            <p class="card-text">T-shirt en coton de coton</p>
-                                            <p class="card-text">Prix : 10€</p>
-                                            <a href="#" class="btn btn-secondary">Ajouter au panier</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col text-center">
-                                    <div class="card mx-auto p-3" style="width: 18rem;">
-                                        <img class="card-img-top" src="./inc/img/BOOTIC_IMG/t_shirt/ts_fuschia.webp"
-                                            alt="Card image cap">
-                                        <div class="card-body">
-                                            <h5 class="card-title">T-shirt</h5>
-                                            <p class="card-text">T-shirt en coton de coton</p>
-                                            <p class="card-text">Prix : 10€</p>
-                                            <a href="#" class="btn btn-secondary">Ajouter au panier</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col text-center">
-                                    <div class="card mx-auto p-3" style="width: 18rem;">
-                                        <img class="card-img-top" src="./inc/img/BOOTIC_IMG/t_shirt/ts_jaune.webp"
-                                            alt="Card image cap">
-                                        <div class="card-body">
-                                            <h5 class="card-title">T-shirt</h5>
-                                            <p class="card-text">T-shirt en coton de coton</p>
-                                            <p class="card-text">Prix : 10€</p>
-                                            <a href="#" class="btn btn-secondary">Ajouter au panier</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col text-center">
-                                    <div class="card mx-auto p-3" style="width: 18rem;">
-                                        <img class="card-img-top" src="./inc/img/BOOTIC_IMG/t_shirt/ts_noir.webp"
-                                            alt="Card image cap">
-                                        <div class="card-body">
-                                            <h5 class="card-title">T-shirt</h5>
-                                            <p class="card-text">T-shirt en coton de coton</p>
-                                            <p class="card-text">Prix : 10€</p>
-                                            <a href="#" class="btn btn-secondary">Ajouter au panier</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col text-center">
-                                    <div class="card mx-auto p-3" style="width: 18rem;">
-                                        <img class="card-img-top" src="./inc/img/BOOTIC_IMG/t_shirt/ts_rose.webp"
-                                            alt="Card image cap">
-                                        <div class="card-body">
-                                            <h5 class="card-title">T-shirt</h5>
-                                            <p class="card-text">T-shirt en coton de coton</p>
-                                            <p class="card-text">Prix : 10€</p>
-                                            <a href="#" class="btn btn-secondary">Ajouter au panier</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col text-center">
-                                    <div class="card mx-auto p-3" style="width: 18rem;">
-                                        <img class="card-img-top" src="./inc/img/BOOTIC_IMG/t_shirt/ts_rouge.webp"
-                                            alt="Card image cap">
-                                        <div class="card-body">
-                                            <h5 class="card-title">T-shirt</h5>
-                                            <p class="card-text">T-shirt en coton de coton</p>
-                                            <p class="card-text">Prix : 10€</p>
-                                            <a href="#" class="btn btn-secondary">Ajouter au panier</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col text-center">
-                                    <div class="card mx-auto p-3" style="width: 18rem;">
-                                        <img class="card-img-top" src="./inc/img/BOOTIC_IMG/t_shirt/ts_vert.webp"
-                                            alt="Card image cap">
-                                        <div class="card-body">
-                                            <h5 class="card-title">T-shirt</h5>
-                                            <p class="card-text">T-shirt en coton de coton</p>
-                                            <p class="card-text">Prix : 10€</p>
-                                            <a href="#" class="btn btn-secondary">Ajouter au panier</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col text-center">
-                                    <div class="card mx-auto p-3" style="width: 18rem;">
-                                        <img class="card-img-top" src="./inc/img/BOOTIC_IMG/t_shirt/ts_violet.webp"
-                                            alt="Card image cap">
-                                        <div class="card-body">
-                                            <h5 class="card-title">T-shirt</h5>
-                                            <p class="card-text">T-shirt en coton de coton</p>
-                                            <p class="card-text">Prix : 10€</p>
-                                            <a href="#" class="btn btn-secondary">Ajouter au panier</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample3"
-                    data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample3"
-                    data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div>
         </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample1" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample1" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+                <!-- LES SWEATS -->
+    
+    <div id="carouselExample2" class="carousel text-center slide py-5 col-6">
+        <h1 class=" mb-3 text-center">Les sweats</h1>
+        <div class="carousel-inner">
+            <?php
+
+                try{
+                    $userName = "root";
+                    $password = '';
+                    $dsn = 'mysql:host=localhost;dbname=dbbootic;port=3306;charset=utf8';
+                    $maBase = new PDO ($dsn, $userName, $password );
+
+                    // $req est un PDOStatement qui effectue une requete sql afin de pouvoir s'en servir en se connectant a $maBase
+                    $req = $maBase->query('SELECT * FROM t_produit');
+                    
+                    $res = $req->fetchAll();
+                    foreach($res as $key => $value){
+                        if($value[2] == 3){
+                            if ($key == 1 ) {
+                                echo("<div class=\"carousel-item\">
+                                <div class=\"card p-0 m-0 mx-auto\" style=\"width: 18rem;\">
+                                <img src=\"./inc/img/BOOTIC_IMG/".$value[12]."/".$value[8].".webp\" class=\"card-img-top\" alt=\"Image d'une \">
+                                <div class=\"card-body\">
+                                    <h5 class=\"card-title\">".$value[3]."</h5>
+                                    <p class=\"card-text\">Prix : ".$value[9]." €</p>
+                                    <p class=\"card-text\">Taille :".$value[6]."</p>
+                                    <p class=\"card-text\">".$value[4]."</p>
+                                    <a href=\"#\" class=\"btn btn-secondary\">Ajouter au panier</a>
+                                </div>
+                                </div>
+                                </div>");
+                            } else {
+                                echo("<div class=\"carousel-item active\">
+                                <div class=\"card mx-auto\" style=\"width: 18rem;\">
+                                <img src=\"./inc/img/BOOTIC_IMG/".$value[12]."/".$value[8].".webp\" class=\"card-img-top\" alt=\"Image d'une ".$value[3]."\">
+                                <div class=\"card-body\">
+                                    <h5 class=\"card-title\">".$value[3]."</h5>
+                                    <p class=\"card-text\">prix : ".$value[9]." €</p>
+                                    <p class=\"card-text\">Taille : ".$value[6]."</p>
+                                    <p class=\"card-text\">".$value[4]."</p>
+                                    <a href=\"#\" class=\"btn btn-secondary\">Ajouter au panier</a>
+                                </div>
+                                </div>
+                                </div>");
+                            }
+                            
+                        }
+
+                    }
+                }   
+                    // Si la connexion ne se fait pas, try renvois a catch, qui contient les messages d'erreur dans PDOException $e et qu'il l'echo de manière beaucoup plus lisible.
+
+                catch (PDOException $e){
+                    echo'Erreur :'. $e->getMessage();
+                }
+
+                ?>
+
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample2" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample2" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+                    <!-- LES T-SHIRT -->
+    
+                    <div id="carouselExample3" class="carousel text-center slide py-5 col-6">
+        <h1 class=" mb-3 text-center">Les T-shirt</h1>
+        <div class="carousel-inner">
+            <?php
+
+                try{
+                    $userName = "root";
+                    $password = '';
+                    $dsn = 'mysql:host=localhost;dbname=dbbootic;port=3306;charset=utf8';
+                    $maBase = new PDO ($dsn, $userName, $password );
+
+                    // $req est un PDOStatement qui effectue une requete sql afin de pouvoir s'en servir en se connectant a $maBase
+                    $req = $maBase->query('SELECT * FROM t_produit');
+                    
+                    $res = $req->fetchAll();
+                    foreach($res as $key => $value){
+                        if($value[2] == 2){
+                            if ($key == 1 ) {
+                                echo("<div class=\"carousel-item\">
+                                <div class=\"card p-0 m-0 mx-auto\" style=\"width: 18rem;\">
+                                <img src=\"./inc/img/BOOTIC_IMG/".$value[12]."/".$value[8].".webp\" class=\"card-img-top\" alt=\"Image d'une \">
+                                <div class=\"card-body\">
+                                    <h5 class=\"card-title\">".$value[3]."</h5>
+                                    <p class=\"card-text\">Prix : ".$value[9]." €</p>
+                                    <p class=\"card-text\">Taille :".$value[6]."</p>
+                                    <p class=\"card-text\">".$value[4]."</p>
+                                    <a href=\"#\" class=\"btn btn-secondary\">Ajouter au panier</a>
+                                </div>
+                                </div>
+                                </div>");
+                            } else {
+                                echo("<div class=\"carousel-item active\">
+                                <div class=\"card mx-auto\" style=\"width: 18rem;\">
+                                <img src=\"./inc/img/BOOTIC_IMG/".$value[12]."/".$value[8].".webp\" class=\"card-img-top\" alt=\"Image d'une ".$value[3]."\">
+                                <div class=\"card-body\">
+                                    <h5 class=\"card-title\">".$value[3]."</h5>
+                                    <p class=\"card-text\">prix : ".$value[9]." €</p>
+                                    <p class=\"card-text\">Taille : ".$value[6]."</p>
+                                    <p class=\"card-text\">".$value[4]."</p>
+                                    <a href=\"#\" class=\"btn btn-secondary\">Ajouter au panier</a>
+                                </div>
+                                </div>
+                                </div>");
+                            }
+                            
+                        }
+
+                    }
+                }   
+                    // Si la connexion ne se fait pas, try renvois a catch, qui contient les messages d'erreur dans PDOException $e et qu'il l'echo de manière beaucoup plus lisible.
+
+                catch (PDOException $e){
+                    echo'Erreur :'. $e->getMessage();
+                }
+
+                ?>
+
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample3" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample3" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
 
 
-    </main>
+</main>
 
-    <?php include './inc/img/footer.inc.php'; ?>
-
-</body>
-
-</html>
+<?php include './inc/img/footer.inc.php'; ?>

@@ -20,28 +20,28 @@
 
         <nav class="navbar sticky-top">
             <div class="container-fluid">
-              <a class="navbar-brand" href="#"><span class=" bg-secondary p-1 rounded text-dark">Boo<span class="text-light">Tic</span></span></a>
+              <a class="navbar-brand" href="/BooTic/"><span class=" bg-secondary p-1 rounded text-dark">Boo<span class="text-light">Tic</span></span></a>
               <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
                 <span class="navbar-toggler-icon"></span>
               </button>
               <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                 <div class="offcanvas-header">
-                <a class="navbar-brand" href="#"><span class=" bg-secondary p-1 rounded text-dark">Boo<span class="text-light">Tic</span></span></a>
+                <a class="navbar-brand" href="/BooTic/"><span class=" bg-secondary p-1 rounded text-dark">Boo<span class="text-light">Tic</span></span></a>
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body">
                   <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                     <li class="nav-item">
-                      <a class="nav-link" aria-current="page" href="#">Inscription</a>
+                      <a class="nav-link" aria-current="page" href="/BooTic/inscription.php">Inscription</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="#">Connexion</a>
+                      <a class="nav-link" href="/BooTic/connexion.php">Connexion</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" aria-current="page" href="#">Boutique</a>
+                      <a class="nav-link" aria-current="page" href="/BooTic/">Boutique</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="#">Panier</a>
+                        <a class="nav-link" aria-current="page" href="/BooTic/panier.php">Panier</a>
                     </li>
                   </ul>
                 </div>
