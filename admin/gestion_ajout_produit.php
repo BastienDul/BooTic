@@ -1,103 +1,107 @@
-<!DOCTYPE html>
-<html lang="fr">
+<?php include '../inc/img/header.inc.php'; ?>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"
-        defer>
-        </script>
-    <script src="https://kit.fontawesome.com/2a53f181be.js" crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="../inc/css/styles.css">
-    <title>BooTic | Vêtement de haute couture</title>
-</head>
+<main class="bg-secondary">
+    <?php
 
-<body>
+    $idProduit = $_GET['id'];
 
-    <?php include '../inc/img/header.inc.php'; ?>
+    try {
+        $username = "root";
+        $password = '';
+        $dsn = 'mysql:host=localhost;dbname=dbbootic;port=3306;charset=utf8';
+        $maBase = new PDO($dsn, $username, $password);
+        $maBase->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    <main>
-        <div class="container">
-            <div class="row text-start">
-                <form action="">
-                    <div class="col-12 text-center">
-                        <h3>Affichage des produits</h3>
-                        <h4>Ajout des produits</h4>
-                    </div>
-                    <div class="col-12">
-                        <h3>Formulaire produit</h3>
-                    </div>
-                    <div class="col-12">
-                        <label for="">reference</label>
-                        <input type="text" class="w-100" placeholder="11-d-23">
-                    </div>
-                    <div class="col-12">
-                        <label for="">categorie</label>
-                        <input type="text" class="w-100" placeholder="tshirt">
-                    </div>
-                    <div class="col-12">
-                        <label for="">titre</label>
-                        <input type="text" class="w-100" placeholder="tshirt col V">
-                    </div>
-                    <div class="col-12">
-                        <label for="">description</label>
-                        <textarea name="" id="" cols="30" rows="10" class="w-100" placeholder="Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat ab perferendis, ipsam maiores optio assumenda suscipit eveniet aspernatur maxime!"></textarea>
-                    </div>
-                    <div class="col-12">
-                        <label for="">couleur</label>
-                        <input type="text" class="w-100" placeholder="Bleu">
-                    </div>
-                    <div class="col-12">
-                        <select name="" id="">
-                            <label for="">Taille</label>
-                            <option value="S">S</option>
-                            <option value="M">M</option>
-                            <option value="L">L</option>
-                            <option value="XL">XL</option>
-                        </select>
-                    </div>
-                    <div class="col-12">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                            <label class="form-check-label" for="flexRadioDefault1">
-                            Homme
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-                            <label class="form-check-label" for="flexRadioDefault2">
-                            Femme
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <label for="image">Sélectionnez une image :</label>
-                        <input type="file" name="image" id="image" accept="image/*">
-                        <input type="submit" value="Télécharger">
-                    </div>
-                    <div class="col-12">
-                        <label for="">prix :</label>
-                        <input type="number" class="w-100" placeholder="Prix">
-                    </div>
-                    <div class="col-12">
-                        <label for="">stock</label>
-                        <input type="number" class="w-100" placeholder="">
-                    </div>
-                    <div class="col-6">
-                        <button class="btn btn-secondary mt-3 text-center">Soummettre</button>
-                    </div>
-                    
-                </form>
 
+        //Ajout de WHERE id_produit = '.$idProduit pour filtrer les resultat par id_produit, comme nous récupérons l'id_produit dans l'url
+        $req = $maBase->query('SELECT * FROM t_produit INNER JOIN t_categorie ON (t_produit.id_categorie = t_categorie.id_categorie) WHERE id_produit = ' . $idProduit);
+
+
+        $res = $req->fetchAll();
+        foreach ($res as $key => $value) {
+            echo ' <div class="container p-3">
+    <div class="row text-start">
+        <form class="form" action="">
+            <div class="col-12 text-center">
+                <h3>Affichage des produits</h3>
+                <h4>Ajout des produits</h4>
             </div>
-        </div>
-    </main>
+            <div class="col-12 col-lg-6 mt-5">
+                <h3>Formulaire produit : ' . $value[3] . '</h3>
+            </div>
+            <div class="col-12 d-flex flex-column">
+                <label for="">reference :</label>
+                <textarea id="story" name="story" rows="0" cols="">' . $value[3] . '</textarea>            
+            </div>
+            <div class="col-12 d-flex flex-column">
+                <label for="">categorie : </label>
+                <textarea id="story" name="story" rows="0" cols="">' . $value[12] . '</textarea>            
+            </div>
+            <div class="col-12 d-flex flex-column">
+                <label for="">titre : </label>
+                <textarea id="story" name="story" rows="0" cols="">' . $value[3] . '</textarea>            
+            </div>
+            <div class="col-12 d-flex flex-column">
+                <label for="">description :</label>
+                <textarea name="" id="" cols="30" rows="0" class="" placeholder="!">' . $value[4] . '</textarea>
+            </div>
+            <div class="col-12 d-flex flex-column">
+                <label for="">couleur :</label>
+                <textarea id="story" name="story" rows="0" cols="">' . $value[5] . '</textarea>            
+            </div>
+            <div class="col-12 d-flex flex-column mt-3 w-25">
+                <select name="" id="">
+                    <label for="">Taille : </label>
+                    <option value="S">' . $value[6] . '</option>
+                </select>
+            </div>
+            <div class="col-6">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                    Homme
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                    <label class="form-check-label" for="flexRadioDefault2">
+                    Femme
+                    </label>
+                </div>
+                <div class="col-6 d-flex flex-column">
+                <label class="" for="">Ancienne image :</label>
+                <img src="../inc/img/BOOTIC_IMG/' . $value[12] . '/' . $value[8] . '.webp" width="72rem" alt="Photo ' . $value[3] . '">
+            </div>
+            </div>
+            <div class="col-6 ">
+                <label for="image">Sélectionnez une image :</label>
+                <input type="file" name="image" id="image" accept="image/*">
+                <input class="w-25" type="submit" value="Télécharger">
+            </div>
 
-    <?php include '../inc/img/footer.inc.php'; ?>
+            <div class="col-12 d-flex flex-column">
+                <label for="">prix :</label>
+                <textarea id="story" name="story" rows="0" cols="">' . $value[9] . '</textarea>
+            </div>
+            <div class="col-12 d-flex flex-column">
+                <label for="">stock : </label>
+                <textarea id="story" name="story" rows="0" cols="">' . $value[10] . '</textarea>            
+            </div>
+            <div class="col-6">
+                <button class="btn btn-dark mt-3">Soummettre</button>
+            </div>
+            
+        </form>
 
-</body>
+    </div>
+    </div>';
+        }
+    } catch (PDOException $e) {
+        echo 'Erreur : ' . $e->getMessage();
+    }
 
-</html>
+    ?>
+
+</main>
+
+<?php include '../inc/img/footer.inc.php'; ?>

@@ -1,6 +1,5 @@
     <!-- FOOTER -->
-    <hr>
-    <footer>
+    <footer class="py-3">
         <div class="container-fluid">
             <div class="row text-center">
                 <div class="col-1">

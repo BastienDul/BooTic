@@ -1,50 +1,54 @@
-<!DOCTYPE html>
-<html lang="fr">
+<?php include './inc/img/header.inc.php'; ?>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous" defer>
-    </script>
-  <script src="https://kit.fontawesome.com/2a53f181be.js" crossorigin="anonymous"></script>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-  <link rel="stylesheet" href="./inc/css/styles.css">
-  <title>BooTic | Vêtement de haute couture</title>
-</head>
+<main class="">
 
-<body>
+  <?php
 
-  <?php include './inc/img/header.inc.php'; ?>
+  $idProduit = $_GET['id'];
 
-  <main class="">
+  try {
+    $username = "root";
+    $password = '';
+    $dsn = 'mysql:host=localhost;dbname=dbbootic;port=3306;charset=utf8';
+    $maBase = new PDO($dsn, $username, $password);
+    $maBase->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    <div class="container-fluid">
+
+    //Ajout de WHERE id_produit = '.$idProduit pour filtrer les resultat par id_produit, comme nous récupérons l'id_produit dans l'url
+    $req = $maBase->query('SELECT * FROM t_produit INNER JOIN t_categorie ON (t_produit.id_categorie = t_categorie.id_categorie) WHERE id_produit = '.$idProduit);
+
+
+    $res = $req->fetchAll();
+    foreach ($res as $key => $value) {
+
+      echo ('<div class="container-fluid">
         <div class="col-12 mx-auto text-center produit-centrage">
           <div class="card p-2" >
             <div class="row text-center align-items-center">
-              <div class="col-4">
-                <img src="./inc/img/BOOTIC_IMG/casquettes/casquette_azur.webp" class="img-fluid rounded-start" alt="photo casquette">
+              <div class="col-12 col-sm-6">
+                <img src="inc/img/BOOTIC_IMG/' . $value[12] . '/' . $value[8] . '.webp" class="img-fluid rounded-start" alt="photo casquette">
               </div>
-              <div class="col-8">
-                <div class="card-body card-body-padding">
-                  <h5 class="card-title">Casquette Azur</h5>
-                  <p class="card-text mt-5">Casquette azur : Élégante, estivale, et indispensable pour un look stylé.</p>
-                  <p class="card-text">prix : 150€</p>
-                  <p class="card-text">matière : coton de coton</p>
-                  <button type="submit" class="btn btn-secondary mt-5">Ajouter au panier</button>
+              <div class="col-12 col-sm-6">
+                <div class="card-body mt-5 card-body-padding">
+                  <h5 class="card-title">' . $value[3] . '</h5>
+                  <p class="card-text">'.$value[4].'</p>
+                  <p class="card-text">prix : '.$value[9].'€</p>
+                  <a href="" class="btn btn-secondary m-2">Ajouter au panier</a>
                 </div>
               </div>
             </div>
           </div>
         </div>
-    </div>
+        </div>');
+    }
+  } catch (PDOException $e) {
+    echo 'Erreur : ' . $e->getMessage();
+  }
 
-  </main>
+  ?>
 
-  <?php include './inc/img/footer.inc.php'; ?>
 
-</body>
 
-</html>
+</main>
+
+<?php include './inc/img/footer.inc.php'; ?>

@@ -1,111 +1,71 @@
-*{
-    padding: 0;
-    margin: 0;
-}
-.border{
-    border: 1px solid black;
-}
-
-
-/* mise en page du main en général */
-main{
-    overflow: hidden;
-}
-
-
 /* background */
-
 main{
-    background-color: rgba(128, 128, 128, 0.438);
+  width: 100%;
 }
 
-header{
-    background-color: white;
+body {
+  background-color: gray;
 }
 
-footer{
-    background-color: white;
+header {
+  background-color: black;
+}
+
+footer {
+  background-color: black;
 }
 
 /* Mise en page concernant le header */
 
-hr{
-    color: black;
+hr {
+  color: black;
 }
-
-
 
 /* Mise en page concernant la page de connexion */
 
-.form-login{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 75vh;
-
+.form-login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 75vh;
 }
 
 /* Mise en page formulaire inscription */
-.form-inscription{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 75vh;
+.form-inscription {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 75vh;
 }
 
 /* Mise en page Panier */
 
-.panier-centrage{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 75vh;
+.panier-centrage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 75vh;
 }
 
 /* Mise en page Produit.php */
 
-.produit-centrage{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 75vh;
+.produit-centrage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 75vh;
 }
 
-.card-body-padding{
-    padding: 0;
-}
 /* mise en page profil.php */
-.profil-centrage{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 75vh;
+.profil-centrage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 75vh;
 }
 
 /* Mise en page index.html */
 
-h5{
-    font-weight: bold;
+h5 {
+  font-weight: bold;
 }
-
-#carouselExample, #carouselExample1, #carouselExample2, #carouselExample3{
-    width: 50%;
-    margin: auto;
-}
-
-.carousel-control-next-icon{
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='1em' viewBox='0 0 320 512'%3E%3C!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --%3E%3Cstyle%3Esvg%7Bfill:%23000000%7D%3C/style%3E%3Cpath d='M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z'/%3E%3C/svg%3E");
-    width: 100%;
-}
-
-.carousel-control-prev-icon{
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='1em' viewBox='0 0 320 512'%3E%3C!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --%3E%3Cstyle%3Esvg%7Bfill:%23000000%7D%3C/style%3E%3Cpath d='M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z'/%3E%3C/svg%3E");
-    width: 100%;
-}
-
-
-@media only screen and (max-width: 900px) {
-    #carouselExample, #carouselExample1, #carouselExample2, #carouselExample3{
-        width: 100%;
-    }
-  }
