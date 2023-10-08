@@ -4,11 +4,7 @@
 <main class="row">
 <?php
 try {
-    $username = "root";
-    $password = '';
-    $dsn = 'mysql:host=localhost;dbname=dbbootic;port=3306;charset=utf8';
-    $maBase = new PDO($dsn, $username, $password);
-    $maBase->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    include './inc/img/connexionDb.inc.php';
 
     $req = $maBase->query('SELECT * FROM t_produit INNER JOIN t_categorie ON (t_produit.id_categorie = t_categorie.id_categorie)');
 

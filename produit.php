@@ -7,11 +7,8 @@
   $idProduit = $_GET['id'];
 
   try {
-    $username = "root";
-    $password = '';
-    $dsn = 'mysql:host=localhost;dbname=dbbootic;port=3306;charset=utf8';
-    $maBase = new PDO($dsn, $username, $password);
-    $maBase->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    include './inc/img/connexionDb.inc.php';
 
 
     //Ajout de WHERE id_produit = '.$idProduit pour filtrer les resultat par id_produit, comme nous récupérons l'id_produit dans l'url

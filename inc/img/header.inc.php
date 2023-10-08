@@ -20,7 +20,7 @@
 
         <nav class="navbar sticky-top">
             <div class="container-fluid">
-              <a class="navbar-brand" href="/BooTic/"><span class=" p-1 rounded text-light">Boo<span class="text-secondary">Tic</span></span></a>
+              <a class="navbar-brand" href="/BooTic/"><span class=" p-1 rounded text-dark">Boo<span class="text-secondary">Tic</span></span></a>
               <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
                 <span class="navbar-toggler-icon"></span>
               </button>
