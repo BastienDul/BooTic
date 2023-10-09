@@ -1,5 +1,6 @@
 <?php include '../inc/img/header.inc.php'; ?>
 <main class="bg-secondary">
+
   <?php
   try {
 
@@ -8,6 +9,11 @@
 
     $req = $maBase->query('SELECT * FROM t_produit INNER JOIN t_categorie ON (t_produit.id_categorie = t_categorie.id_categorie)');
 
+      echo('<div class="row bg-light py-5">
+      <div class="col-12 text-center">
+        <button class="btn btn-success mx-auto"><a class="text-light text-decoration-none" href="gestion_ajout_produit.php">Ajouter un Produit</a></button>
+      </div>
+      </div>');
 
     $res = $req->fetchAll();
     foreach ($res as $key => $value) {
@@ -64,11 +70,11 @@
         </tr>
         <tr>
           <th scope="row">Modification</th>
-          <td><a href=""><img src="../inc/img/BOOTIC_IMG/trash-310219_640.png" width="72rem" alt="photo Poubelle"></a></td>
+          <td><a href="gestion_ajout_produit.php?id=' . $value[0] . '"><img src="../inc/img/BOOTIC_IMG/list-2389219_640.png" width="72rem" alt="photo bloc note"></a></td>
         </tr>
         <tr>
           <th scope="row">Suppression</th>
-          <td><a href="gestion_ajout_produit.php?id=' . $value[0] . '"><img src="../inc/img/BOOTIC_IMG/list-2389219_640.png" width="72rem" alt="photo bloc note"></a></td>
+          <td><a href=""><img src="../inc/img/BOOTIC_IMG/trash-310219_640.png" width="72rem" alt="photo Poubelle"></a></td>
         </tr>
       </tbody>
     </table>';

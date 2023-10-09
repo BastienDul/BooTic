@@ -18,7 +18,7 @@
     $res = $req->fetchAll();
     foreach ($res as $key => $value) {
 
-      echo ('<div class="container-fluid">
+      echo '<div class="container-fluid">
         <div class="col-12 mx-auto text-center produit-centrage">
           <div class="card p-2" >
             <div class="row text-center align-items-center">
@@ -36,7 +36,7 @@
             </div>
           </div>
         </div>
-        </div>');
+        </div>';
     }
   } catch (PDOException $e) {
     echo 'Erreur : ' . $e->getMessage();
