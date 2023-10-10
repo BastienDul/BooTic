@@ -17,7 +17,7 @@ try {
 
         echo "<div class=\"col-12 col-md-4 col-lg-3 my-3 col-xxl-2\">";
         echo "<div class=\"card mx-auto\" style=\"width: 16rem;\">";
-        echo "<img class=\"img-fluid card-img-top\" src=\"inc/img/BOOTIC_IMG/$value[12]/$value[8].webp\" alt=\"Card image cap\">";
+        echo "<img class=\"img-fluid card-img-top\" src=\"inc/img/BOOTIC_IMG/$value[8]\" alt=\"Card image cap\">";
         echo "<div class=\"card-body\">";
         echo "<h5 class=\"card-title text-center\">$value[3]</h5>";
         echo "<p class=\"card-text text-center \">$value[9]€  </p>";

@@ -4,7 +4,7 @@
 
   <?php
 
-$idProduit = $_GET['id'];
+  $idProduit = $_GET['id'];
 
 try {
   
