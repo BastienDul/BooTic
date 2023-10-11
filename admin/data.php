@@ -1,9 +1,11 @@
 <?php include '../inc/img/header.inc.php'; ?>
 
+<?php include '../inc/img/connexionDb.inc.php';?>
+
 <?php
 
     $creationPage = $_GET['action'];
-    $idProduit = $_GET['id'];
+
 
 if ($creationPage == "C") {
 
@@ -72,7 +74,7 @@ if ($creationPage == "C") {
         include '../inc/img/connexionDb.inc.php';
 
         $req = $maBase->prepare('INSERT INTO t_produit (reference, id_categorie, titre, description, couleur, taille, public, photo, prix, stock) 
-    VALUES(:reference, :categorie, :titre, :description, :couleur, :taille, :genre, :name, :prix, :stock)');
+    VALUES(:reference, :categorie, :titre, :description, :couleur, :taille, :genre, :name, :prix, :stock) LIMIT 1');
 
 
         $req->bindValue(':reference', $reference, PDO::PARAM_STR);
@@ -85,8 +87,6 @@ if ($creationPage == "C") {
         $req->bindValue(':name', $name, PDO::PARAM_STR);
         $req->bindValue(':prix', $prix, PDO::PARAM_INT);
         $req->bindValue(':stock', $stock, PDO::PARAM_INT);
-
-        $req->execute();
 
         if ($req->execute()) {
             echo '<div class="row text-center my-5">
@@ -113,7 +113,7 @@ if ($creationPage == "C") {
 
         } elseif ($creationPage == "U") {
 
-
+            $id_produit = $_GET['id'];
 
             // !!! recupérations de l'image !!! 
 
@@ -133,25 +133,6 @@ if ($creationPage == "C") {
             //Taille max que l'on accepte
             $maxSize = 400000;
 
-            if (in_array($extension, $extensions) && $size <= $maxSize && $error == 0) {
-                move_uploaded_file($tmpName, '../inc/img/BOOTIC_IMG/' . $name);
-            } else {
-                echo "Une erreur est survenue";
-            }
-
-
-            // !!! recuperation des données !!!
-            
-            $id_produit = $_GET['idproduit']; // LE PROBLEME EST ICI §§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§
-            $reference = $_POST['reference'];
-            $categorie = $_POST['categorie'];
-            $titre = $_POST['titre'];
-            $description = $_POST['description'];
-            $couleur = $_POST['couleur'];
-            $taille = $_POST['taille'];
-            $genre = $_POST['genre'];
-            $prix = $_POST['prix'];
-            $stock = $_POST['stock'];
 
             // !!! VERIFIER QUE LES VARIABLES SONT BIEN SUBMIT !!!
 
@@ -175,26 +156,59 @@ if ($creationPage == "C") {
             // echo'</br>';
             // echo $name;
 
+            // !!!!!!!!!!!!!! A VOIR DEMAIN !!!!!!!!!!!!!!!!!!!!!!!!!
+            
+            // if ($_FILES['file']['size'] === 0){
 
+            // }
+            // if (in_array($extension, $extensions) && $size <= $maxSize && $error == 0) {
+            //     move_uploaded_file($tmpName, '../inc/img/BOOTIC_IMG/' . $name);
+            
+            //     try{
+
+            //         $req0 = $maBase->prepare('UPDATE t_produit
+            //         SET   photo =  :name
+            //         WHERE id_produit = :id_produit');
+            //         $req0->bindValue(':name', $name, PDO::PARAM_STR);
+            //         $req0->execute();
+            //         } catch (PDOException $e) {
+            //             echo 'Erreur : ' . $e->getMessage();
+            //         }
+            // } else {
+            //     echo "Une erreur est survenue";
+            // }
+
+                        // !!! recuperation des données !!!
+
+                        $reference = $_POST['reference'];
+                        $categorie = $_POST['categorie'];
+                        $titre = $_POST['titre'];
+                        $description = $_POST['description'];
+                        $couleur = $_POST['couleur'];
+                        $taille = $_POST['taille'];
+                        $genre = $_POST['genre'];
+                        $prix = $_POST['prix'];
+                        $stock = $_POST['stock'];
 
             try {
                 
-                include '../inc/img/connexionDb.inc.php';
 
-                // Ajoutez ici le code pour vérifier si le produit existe
-                $verifExistanceProduit = $maBase->prepare('SELECT id_produit FROM t_produit WHERE id_produit = :idproduit LIMIT 1');
-                $verifExistanceProduit->bindValue(':idproduit', $id_produit,PDO::PARAM_INT);
-                $verifExistanceProduit->execute();
-                    
-                // Le produit existe, mettez le à jour 
+                
 
-                $req = $maBase->prepare('UPDATE t_produit SET (id_produit = :idproduit, reference = :reference, id_categorie = :categorie, titre = :titre,
-                description = :description, couleur = :couleur, taille = :taille, public = :genre, photo = :name, prix = :prix, stock = :stock)
-                WHERE idproduit = :id_produit');
-
+                $req = $maBase->prepare('UPDATE t_produit 
+                SET reference = :reference,
+                id_categorie = :categorie,
+                titre = :titre,
+                description = :description,
+                couleur = :couleur,
+                taille = :taille,
+                public = :genre,
+                photo = :name,
+                prix = :prix,
+                stock = :stock
+                WHERE id_produit = :id_produit');
 
                 $req->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
-                $req->bindValue(':id_produit', $id_produit, PDO::PARAM_INT); 
                 $req->bindValue(':reference', $reference, PDO::PARAM_STR);
                 $req->bindValue(':categorie', $categorie, PDO::PARAM_INT);
                 $req->bindValue(':titre', $titre, PDO::PARAM_STR);
@@ -206,12 +220,10 @@ if ($creationPage == "C") {
                 $req->bindValue(':prix', $prix, PDO::PARAM_INT);
                 $req->bindValue(':stock', $stock, PDO::PARAM_INT);
 
-                $req->execute();
-
                 if ($req->execute()) {
                     echo '<div class="row text-center my-5">
                 <div class="col-12">
-                    <h3>Votre ajout de produit à été effectué !</h3>
+                    <h3>Votre modification de produit à été effectué !</h3>
                 </div>
             
                 <div class="col-12">
@@ -227,7 +239,37 @@ if ($creationPage == "C") {
             echo 'Erreur : ' . $e->getMessage();
                 
           }
+
+        //   !!!!!!!!!!!!!!!!!!!!!!! ELSE SUPPRESSION !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     
+        } elseif ($creationPage == "D") {
+
+            $id_produit = $_GET['id'];
+
+            try {
+                include '../inc/img/connexionDb.inc.php';
+
+                $req = $maBase -> prepare('DELETE FROM t_produit WHERE id_produit = :id_produit');
+
+                $req->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
+
+                if ($req->execute()) {
+                    echo '<div class="row text-center my-5">
+                    <div class="col-12">
+                        <h3>Votre  de produit à été supprimé !</h3>
+                    </div>
+                
+                    <div class="col-12">
+                        <a href="gestion_boutique.php"><input type="text" class="btn btn-success w-25"  value="Retournez a la gestion des produits"></a>
+                    </div>
+                </div>';
+                    } else {
+                        echo 'Un problème est survenue lors de la suppréssions !';
+                    }
+                
+            } catch (PDOException $e) {
+                echo 'Erreur : ' . $e->getMessage();
+            }
         }
 
 

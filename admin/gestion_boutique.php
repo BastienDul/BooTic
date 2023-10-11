@@ -58,7 +58,7 @@
         </tr>
         <tr>
           <th scope="row">photo</th>
-          <td><img src="../inc/img/BOOTIC_IMG/' . $value[12] . '/' . $value[8] . '.webp" width="72rem" alt="Photo ' . $value[3] . '"></td>
+          <td><img src="../inc/img/BOOTIC_IMG/'.$value[8].'" width="72rem" alt="Photo ' . $value[3] . '"></td>
         </tr>
         <tr>
           <th scope="row">prix</th>
@@ -74,7 +74,7 @@
         </tr>
         <tr>
           <th scope="row">Suppression</th>
-          <td><a href=""><img src="../inc/img/BOOTIC_IMG/trash-310219_640.png" width="72rem" alt="photo Poubelle"></a></td>
+          <td><a href="data.php?action=D&id='.$value[0].'" class="bouton_delet" ><img src="../inc/img/BOOTIC_IMG/trash-310219_640.png" width="72rem" alt="photo Poubelle"></a></td>
         </tr>
       </tbody>
     </table>';
@@ -88,3 +88,20 @@
 </main>
 
 <?php include '../inc/img/footer.inc.php'; ?>
+
+<script>
+  var deleteButtons = document.querySelectorAll(".bouton_delet");
+
+  deleteButtons.forEach(function (button) {
+    button.addEventListener("click", function (event) {
+        event.preventDefault(); // Empêche le comportement par défaut du lien
+
+        var confirmation = confirm("Êtes-vous sûr de vouloir supprimer cette ligne ?");
+
+        if (confirmation) {
+            // Redirigez l'utilisateur vers le lien spécifié
+            window.location.href = button.getAttribute("href");
+        }
+    });
+});
+</script>

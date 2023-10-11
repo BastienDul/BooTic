@@ -23,7 +23,7 @@
           <div class="card p-2" >
             <div class="row text-center align-items-center">
               <div class="col-12 col-sm-6">
-                <img src="inc/img/BOOTIC_IMG/' . $value[12] . '/' . $value[8] . '.webp" class="img-fluid rounded-start" alt="photo casquette">
+                <img src="inc/img/BOOTIC_IMG/' . $value[8] . '" class="img-fluid rounded-start" alt="photo casquette">
               </div>
               <div class="col-12 col-sm-6">
                 <div class="card-body mt-5 card-body-padding">

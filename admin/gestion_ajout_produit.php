@@ -21,7 +21,7 @@
 
             echo ' <div class="container p-3">
         <div class="row text-start">
-            <form method="post" action="data.php" class="form" enctype="multipart/form-data">
+            <form method="post" action="data.php?action=C" class="form" enctype="multipart/form-data">
                 <div class="col-12 text-center">
                     <h4>Ajout d\'un produits</h4>
                 </div>
@@ -68,19 +68,19 @@
                 </div>
                 <div class="col-12">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="genre" value="Homme" id="flexRadioDefault1">
+                        <input class="form-check-input" type="radio" name="genre" value=m id="flexRadioDefault1">
                         <label class="form-check-label" for="flexRadioDefault1">
                         Homme
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="genre" value="Femme" id="flexRadioDefault2" checked>
+                        <input class="form-check-input" type="radio" name="genre" value=f id="flexRadioDefault2" checked>
                         <label class="form-check-label" for="flexRadioDefault2">
                         Femme
                         </label>
                     </div>
                     <div class="form-check">
-                    <input class="form-check-input" type="radio" name="genre" value="Mixte" id="flexRadioDefault2" checked>
+                    <input class="form-check-input" type="radio" name="genre" value=mixte id="flexRadioDefault2" checked>
                     <label class="form-check-label" for="flexRadioDefault2">
                     Mixte
                     </label>
@@ -98,7 +98,7 @@
                     <textarea id="story" name="stock" rows="0" cols="" placeholder="Nombre en"></textarea>            
                 </div>
                 <div class="col-6">
-                    <a href="data.php?action=C"><input type="submit" value="Soumettre" class="btn btn-dark mt-3"></a>
+                    <a href=""><input type="submit" value="Soumettre" class="btn btn-dark mt-3"></a>
                 </div>
                 
             </form>
@@ -134,11 +134,19 @@
                 </div>
                 <div class="col-12 d-flex flex-column">
                     <label for="">categorie : </label>
-                    <textarea id="story" name="categorie" rows="0" cols="">' . $value[12] . '</textarea>            
+                    <select name="categorie" id="">
+                        <option name="categorie" value="" disabled> -- Catégorie du produit -- </option>
+                        <option name="categorie" value="'.$value[11].'" selected> '.$value[12].' </option>
+                        <option name="categorie" value="" disabled>-- Si besoin de modifier, selectionnez ci dessous --</option>
+                        <option name="categorie" value= 3 >Sweats</option>
+                        <option name="categorie" value= 2 >T-shirt</option>
+                        <option name="categorie" value= 4 >Casquette</option>
+                        <option name="categorie" value= 1 >Sac</option>
+                    </select>        
                 </div>
                 <div class="col-12 d-flex flex-column">
                     <label for="">titre : </label>
-                    <textarea id="story" name="titre" rows="0" cols="">' . $value[3] . '</textarea>            
+                    <textarea id="story" name="titre" rows="0" cols="">'.$value[3].'</textarea>            
                 </div>
                 <div class="col-12 d-flex flex-column">
                     <label for="">description :</label>
@@ -152,7 +160,7 @@
                     <select name="taille" id="">
                         <label for="">Taille : </label>
                         <option name="taille" value="" disabled>-- Taille de base --</option>
-                        <option name="taille" value="" selected>' . $value[6] . '</option>
+                        <option name="taille" value="'.$value[6].'" selected>' . $value[6] . '</option>
                         <option name="taille" value="" disabled>-- Si autre choississez --</option>
                         <option name="taille" value="S">S</option>
                         <option name="taille" value="M">M</option>
@@ -163,13 +171,13 @@
                 </div>
                 <div class="col-12">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="genre" value="Homme" id="flexRadioDefault1">
+                        <input class="form-check-input" type="radio" name="genre" value="m" id="flexRadioDefault1" checked>
                         <label class="form-check-label" for="flexRadioDefault1">
                         Homme
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="genre" value="Femme" id="flexRadioDefault2" checked>
+                        <input class="form-check-input" type="radio" name="genre" value="f" id="flexRadioDefault2" checked>
                         <label class="form-check-label" for="flexRadioDefault2">
                         Femme
                         </label>
@@ -182,7 +190,7 @@
                 </div>
                 <div class="col-12 d-flex flex-column">
                     <label for="">image :</label>
-                    <img src="../inc/img/BOOTIC_IMG/'.$value[8].'" class="w-25">
+                    <img name="photoBase" src="../inc/img/BOOTIC_IMG/'.$value[8].'" class="w-25">
                     <input type="file" name="file">
                 </div>
                 <div class="col-12 d-flex flex-column">
@@ -194,7 +202,7 @@
                     <textarea id="story" name="stock" rows="0" cols="">' . $value[10] . '</textarea>            
                 </div>
                 <div class="col-6">
-                    <a href="data.php?action=U"><input type="submit" value="Modifier" class="btn btn-dark mt-3"></a>
+                    <a href=""><input type="submit" value="Modifier" class="btn btn-dark mt-3"></a>
                 </div>
                 
             </form>
@@ -208,7 +216,6 @@
     } catch (PDOException $e) {
         echo 'Erreur : ' . $e->getMessage();
     }
-
 
 
 
