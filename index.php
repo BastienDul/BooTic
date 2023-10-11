@@ -15,7 +15,7 @@ try {
     echo"<h1 class=\"text-center mt-3\">Les vêtements </h1>";
     foreach ($res as $key => $value) {
 
-        echo "<div class=\"col-12 col-md-4 col-lg-3 my-3 col-xxl-2\">";
+        echo "<div class=\"col-12 col-md-4 col-lg-3 my-3 col-xxl-2 mx-3\">";
         echo "<div class=\"card mx-auto\" style=\"width: 16rem;\">";
         echo "<img class=\"img-fluid card-img-top\" src=\"inc/img/BOOTIC_IMG/$value[8]\" alt=\"Card image cap\">";
         echo "<div class=\"card-body\">";
