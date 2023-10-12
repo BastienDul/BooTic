@@ -178,17 +178,17 @@ if ($creationPage == "C") {
             //     echo "Une erreur est survenue";
             // }
 
-                        // !!! recuperation des données !!!
+            // !!! recuperation des données !!!
 
-                        $reference = $_POST['reference'];
-                        $categorie = $_POST['categorie'];
-                        $titre = $_POST['titre'];
-                        $description = $_POST['description'];
-                        $couleur = $_POST['couleur'];
-                        $taille = $_POST['taille'];
-                        $genre = $_POST['genre'];
-                        $prix = $_POST['prix'];
-                        $stock = $_POST['stock'];
+            $reference = $_POST['reference'];
+            $categorie = $_POST['categorie'];
+            $titre = $_POST['titre'];
+            $description = $_POST['description'];
+            $couleur = $_POST['couleur'];
+            $taille = $_POST['taille'];
+            $genre = $_POST['genre'];
+            $prix = $_POST['prix'];
+            $stock = $_POST['stock'];
 
             try {
                 
