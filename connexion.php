@@ -1,21 +1,21 @@
-    <?php include './inc/img/header.inc.php'; ?>
+<?php include './inc/img/header.inc.php'; ?>
 
-    <?php include './inc/img/connexionDb.inc.php';?>
+<?php include './inc/img/connexionDb.inc.php'; ?>
 
-    <main>
-
-
-        <?php
-
-        try {
-
-            // Requete pour avoir accès au infos de ma table t_membre pour verifier par la suite si l'utilisateur existe bien !
-            $req = $maBase->query('SELECT * FROM t_membre');
+<main>
 
 
+    <?php
 
-            // page de connexion
-            echo'   <div class="container form-login">
+    try {
+
+        // Requete pour avoir accès au infos de ma table t_membre pour verifier par la suite si l'utilisateur existe bien !
+        $req = $maBase->query('SELECT * FROM t_membre');
+
+
+
+        // page de connexion
+        echo '   <div class="container form-login">
                         <div class="row bg-light p-5 rounded">
                             <div class="col ">
                                 <form method="post" action="admin/admin.php?action=L">
@@ -34,15 +34,15 @@
                     </div>';
 
 
-        } catch (PDOException $e) {
-            echo 'Erreur : ' . $e->getMessage();
-        }
+    } catch (PDOException $e) {
+        echo 'Erreur : ' . $e->getMessage();
+    }
 
 
 
 
 
-        ?>
-    </main>
+    ?>
+</main>
 
-    <?php include './inc/img/footer.inc.php'; ?>
+<?php include './inc/img/footer.inc.php'; ?>

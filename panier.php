@@ -1,23 +1,23 @@
-  <?php include './inc/img/header.inc.php'; ?>
+<?php include './inc/img/header.inc.php'; ?>
 
-  <main class="">
+<main class="">
 
   <?php
 
   $idProduit = $_GET['id'];
 
-try {
-  
-  include './inc/img/connexionDb.inc.php';
+  try {
+
+    include './inc/img/connexionDb.inc.php';
 
 
-  //Ajout de WHERE id_produit = '.$idProduit pour filtrer les resultat par id_produit, comme nous récupérons l'id_produit dans l'url
-  $req = $maBase->query('SELECT * FROM t_produit INNER JOIN t_categorie ON (t_produit.id_categorie = t_categorie.id_categorie) WHERE id_produit = '.$idProduit);
+    //Ajout de WHERE id_produit = '.$idProduit pour filtrer les resultat par id_produit, comme nous récupérons l'id_produit dans l'url
+    $req = $maBase->query('SELECT * FROM t_produit INNER JOIN t_categorie ON (t_produit.id_categorie = t_categorie.id_categorie) WHERE id_produit = ' . $idProduit);
 
 
-  $res = $req->fetchAll();
-  foreach ($res as $key => $value) {
-    echo'<div class="container ">
+    $res = $req->fetchAll();
+    foreach ($res as $key => $value) {
+      echo '<div class="container ">
     <div class="row panier-centrage">
       <div class="col-12 ">
         <table class="table table-bordered">
@@ -34,9 +34,9 @@ try {
               <th>Action</th>
             </tr>
             <tr>
-              <td scope="row">'.$value[3].'</td>
+              <td scope="row">' . $value[3] . '</td>
               <td></td>
-              <td>'.$value[9].'€</td>
+              <td>' . $value[9] . '€</td>
               <td></td>
             </tr>
             <tr>
@@ -56,12 +56,12 @@ try {
     </div>
   </div>
   </div>';
+    }
+  } catch (PDOException $e) {
+    echo 'Erreur : ' . $e->getMessage();
   }
-}catch (PDOException $e) {
-  echo 'Erreur : ' . $e->getMessage();
-}
 
-?>
+  ?>
 </main>
 
 <?php include './inc/img/footer.inc.php'; ?>

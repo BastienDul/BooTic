@@ -224,19 +224,3 @@
 </main>
 
 <?php include '../inc/img/footer.inc.php'; ?>
-
-<!-- Tableau remplie avec les values recuperer -->
-
-<!-- try {
-    
-
-
-
-
-
-
-
-   }
-    } catch (PDOException $e) {
-    echo 'Erreur : ' . $e->getMessage();
-    } -->

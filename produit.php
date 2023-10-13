@@ -12,7 +12,7 @@
 
 
     //Ajout de WHERE id_produit = '.$idProduit pour filtrer les resultat par id_produit, comme nous récupérons l'id_produit dans l'url
-    $req = $maBase->query('SELECT * FROM t_produit INNER JOIN t_categorie ON (t_produit.id_categorie = t_categorie.id_categorie) WHERE id_produit = '.$idProduit);
+    $req = $maBase->query('SELECT * FROM t_produit INNER JOIN t_categorie ON (t_produit.id_categorie = t_categorie.id_categorie) WHERE id_produit = ' . $idProduit);
 
 
     $res = $req->fetchAll();
@@ -28,8 +28,8 @@
               <div class="col-12 col-sm-6">
                 <div class="card-body mt-5 card-body-padding">
                   <h5 class="card-title">' . $value[3] . '</h5>
-                  <p class="card-text">'.$value[4].'</p>
-                  <p class="card-text">prix : '.$value[9].'€</p>
+                  <p class="card-text">' . $value[4] . '</p>
+                  <p class="card-text">prix : ' . $value[9] . '€</p>
                   <a href="" class="btn btn-secondary m-2">Ajouter au panier</a>
                 </div>
               </div>

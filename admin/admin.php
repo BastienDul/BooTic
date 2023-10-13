@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <?php include '../inc/img/header.inc.php'; ?>
 
 
@@ -14,15 +17,15 @@ if ($creationPage == "C") {
 
     // !!! recuperation des données !!!
 
-    $pseudo = strtoupper($_POST['pseudo']);
+    $pseudo = htmlspecialchars(strtoupper($_POST['pseudo']));
     $password = $_POST['motdepasse'];
-    $nom = strtoupper($_POST['nom']);
-    $prenom = strtoupper($_POST['prenom']);
-    $email = $_POST['email'];
-    $genre = $_POST['genre'];
-    $ville = $_POST['ville'];
-    $codePostal = $_POST['codepostal'];
-    $adresse = $_POST['adresse'];
+    $nom = htmlspecialchars(strtoupper($_POST['nom']));
+    $prenom = htmlspecialchars(strtoupper($_POST['prenom']));
+    $email = htmlspecialchars($_POST['email']);
+    $genre = htmlspecialchars($_POST['genre']);
+    $ville = htmlspecialchars($_POST['ville']);
+    $codePostal = htmlspecialchars($_POST['codepostal']);
+    $adresse = htmlspecialchars($_POST['adresse']);
 
     // haché le password
     $passwordHash = password_hash($password, PASSWORD_BCRYPT);
@@ -86,21 +89,37 @@ if ($creationPage == "C") {
     }
 
 } elseif ($creationPage == "L") {
+    $pseudo = htmlspecialchars($_POST['pseudo']);
+    $password = htmlspecialchars($_POST['motdepasse']);
 
-    // && $pseudo == $value[1] && $password == $value[2]
-    try {
+    // On regarde si le pseudo existe dans la base de donnée
+    $req = $maBase -> prepare('SELECT * FROM t_membre WHERE pseudo = ?');
 
-        $req = $maBase->prepare('SELECT * FROM t_membre WHERE ');
+    $req -> bindValue(1, $pseudo, PDO::PARAM_STR);
+    $req -> execute();
+    $result = $req -> fetch(PDO::FETCH_BOTH);
+    if ($result) {
+        if (password_verify($password, $result['mdp'])){
+            // On definit des variables de session
+            $_SESSION['pseudo'] = $result['pseudo'];
+            header('location: ./../profil.php');
+           
 
-        if ($pseudo == $value[1] && $password == $value[2]) {
             
-        }
-
-    } catch (PDOException $e) {
-
-        echo 'Erreur : ' . $e->getMessage();
-
+        } else {
+            echo'Vous n\'êtes pas inscrit';
+        } 
+    } else {
+        echo 'Vous devez d\'abord vous inscrire';
     }
+    $maBase = null;
+
+}
+
+$logout = isset($_GET['deconnexion']);
+if ($logout == 1) {
+    session_destroy();
+    header('location: ./../index.php');
 }
 
 

@@ -1,5 +1,4 @@
-    
-    
+      
     <?php include './inc/img/header.inc.php'; ?>
 
     <main class="">
