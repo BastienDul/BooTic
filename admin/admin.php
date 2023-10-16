@@ -1,5 +1,4 @@
 <?php
-session_start();
 include '../inc/img/header.inc.php'; 
 include '../inc/img/connexionDb.inc.php'; ?>
 

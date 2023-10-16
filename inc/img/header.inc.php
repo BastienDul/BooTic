@@ -5,10 +5,6 @@ session_start();
 if (isset($_SESSION['pseudo'])) {
   $pseudo = $_SESSION['pseudo'];
 }
-
-include './inc/img/connexionDb.inc.php';
-
-
 ?>
 
 

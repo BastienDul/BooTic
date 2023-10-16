@@ -1,5 +1,7 @@
       
-    <?php include './inc/img/header.inc.php'; ?>
+    <?php include './inc/img/header.inc.php'; 
+    include './inc/img/connexionDb.inc.php';
+    ?>
 
     <main class="">
 

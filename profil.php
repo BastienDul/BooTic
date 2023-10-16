@@ -6,6 +6,7 @@ if (isset($_SESSION['pseudo'])) {
 }
 require './inc/img/header.inc.php';
 require './functions.php';
+include './inc/img/connexionDb.inc.php';
 ?>
 
 
