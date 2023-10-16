@@ -5,20 +5,20 @@
 
     <form class="form-inscription container text-center w-50" method="post" action="admin/admin.php?action=C">
         
-        <div class="row text-start bg- p-3 bg-dark text-light rounded-3">
+        <div class="row text-start p-3 bg-dark text-light rounded-3">
             <div class="col-12 mb-3 text-center">
                 <h2>Inscrivez-vous</h2>
             </div>
-            <div class="col-6 mt-1 w-50">
+            <div class="col-12 mt-1">
                 <input name="pseudo" type="text" class="w-100"  placeholder="Pseudo" required>
             </div>
-            <div class="col-6 mt-1  w-50">
+            <div class="col-12 mt-1 ">
                 <input name="motdepasse" type="password" class="w-100" placeholder="Votre mot de passe" required>
             </div>
-            <div class="col-6 w-50 mt-1 ">
+            <div class="col-12 mt-1 ">
                 <input name="nom" type="text" class="w-100" placeholder="Nom" required>
             </div>
-            <div class="col-6 w-50 mt-1 ">
+            <div class="col-12 mt-1 ">
                 <input name="prenom" type="text" class="w-100" placeholder="Prénom" required>
             </div>
             <div class="col-12 mt-1 ">
@@ -29,11 +29,11 @@
             </div>
             <div class="col-2 mt-1 form-check d-lg-flex">
                     <div class="form-check col-12">
-                        <input class="form-check-input" type="radio"  name="genre" value=h id="flexRadioDefault1" required>
+                        <input class="form-check-input" type="radio"  name="genre" value="h" id="flexRadioDefault1" required>
                         <label class="form-check-label" for="flexRadioDefault1">Homme</label>
                       </div>
                       <div class="form-check col-12">
-                        <input class="form-check-input" type="radio"  name="genre" value=f id="flexRadioDefault2" required>
+                        <input class="form-check-input" type="radio"  name="genre" value="f" id="flexRadioDefault2" required>
                         <label class="form-check-label" for="flexRadioDefault2">Femme</label>
                       </div>
             </div>

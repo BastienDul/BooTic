@@ -1,10 +1,7 @@
 <?php
 session_start();
-?>
-<?php include '../inc/img/header.inc.php'; ?>
-
-
-<?php include '../inc/img/connexionDb.inc.php'; ?>
+include '../inc/img/header.inc.php'; 
+include '../inc/img/connexionDb.inc.php'; ?>
 
 <?php
 
@@ -89,6 +86,7 @@ if ($creationPage == "C") {
     }
 
 } elseif ($creationPage == "L") {
+
     $pseudo = htmlspecialchars($_POST['pseudo']);
     $password = htmlspecialchars($_POST['motdepasse']);
 
@@ -103,8 +101,6 @@ if ($creationPage == "C") {
             // On definit des variables de session
             $_SESSION['pseudo'] = $result['pseudo'];
             header('location: ./../profil.php');
-           
-
             
         } else {
             echo'Vous n\'êtes pas inscrit';
@@ -119,7 +115,7 @@ if ($creationPage == "C") {
 $logout = isset($_GET['deconnexion']);
 if ($logout == 1) {
     session_destroy();
-    header('location: ./../index.php');
+    header('location: ./../connexion.php');
 }
 
 

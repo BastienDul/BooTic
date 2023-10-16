@@ -1,17 +1,13 @@
 <?php 
 session_start();
 
-var_dump($_SESSION);
-
-//  On verifie que la variable seession pseudo existe
 
 if (isset($_SESSION['pseudo'])) {
   $pseudo = $_SESSION['pseudo'];
 }
 
-?>
+include './inc/img/connexionDb.inc.php';
 
-<?php
 
 ?>
 
@@ -25,7 +21,7 @@ if (isset($_SESSION['pseudo'])) {
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"
     defer></script>
-  <script type="module" src="./../inc/js/main.js"></script>
+  <script type="module" src="./../inc/js/main.js" defer></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   <link rel="stylesheet" href="inc/css/styles.css">
@@ -72,8 +68,8 @@ if (isset($_SESSION['pseudo'])) {
                   </svg></a>
               </li>
               <?php if ($pseudo) {
-                        echo '<li class="nav-item">
-                        <a class="nav-link active" href="profil.php">profil</a>
+                        echo '<li class="nav-item ">
+                        <a class="nav-link active text-light" href="profil.php">Profil</a>
                         </li>';
                     }
               ?>
@@ -83,6 +79,7 @@ if (isset($_SESSION['pseudo'])) {
       </div>
     </nav>
   </header>
+  <p>Connecté en tant que <?php echo'<span>'.$pseudo.'</span>' ?></p>
 </body>
 
 </html>
